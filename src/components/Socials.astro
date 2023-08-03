@@ -1,0 +1,34 @@
+---
+import DiscordIcon from "./icons/DiscordIcon.astro";
+import EmailIcon from "./icons/EmailIcon.astro";
+import GithubIcon from "./icons/GithubIcon.astro";
+---
+
+<span class="flex gap-1">
+  <a
+    href="https://github.com/ErikGXDev"
+    target="_blank"
+    title="ErikGXDev on Github"
+  >
+    <GithubIcon /></a
+  >
+  <a
+    href="https://discord.com/users/610788461028573194"
+    target="_blank"
+    title="ErikGXDev on Discord"
+  >
+    <DiscordIcon /></a
+  >
+  <a href="mailto:contact@eriko.dev" target="_blank" title="ErikGXDev's Email"
+    ><EmailIcon /></a
+  >
+</span>
+
+<style>
+  span {
+    @apply fill-brand-white scale-125;
+  }
+  a {
+    @apply hover:fill-brand-orange hover:rotate-6 transition-transform;
+  }
+</style>

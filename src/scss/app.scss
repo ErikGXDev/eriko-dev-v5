@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap");
+
+@function gradientSteps($start, $end, $steps, $direction: "to right") {
+  @if $steps < 2 {
+    $steps: 2;
+  }
+  $colors: ();
+  $stepSpan: calc(100% / $steps);
+  $spans: ();
+  //$stops: ($start 0%, $end 100%);
+  $stops: ();
+  @for $i from 0 through $steps - 1 {
+    $colors: append(
+      $colors,
+      mix($start, $end, 100% - calc($i/($steps - 1)) * 100)
+    );
+    $spans: append($spans, $i * calc(100% / $steps));
+  }
+  $spans: append($spans, 100%);
+  @for $i from 1 through $steps {
+    $stops: append($stops, (nth($colors, $i) nth($spans, $i)), comma);
+    $stops: append($stops, (nth($colors, $i) nth($spans, $i + 1)), comma);
+  }
+  @return linear-gradient(#{$direction}, $stops);
+}
+
+.staggered-hr {
+  background: gradientSteps(#e8bd21, #e61879, 3);
+}

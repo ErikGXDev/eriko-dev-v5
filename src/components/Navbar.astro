@@ -1,0 +1,61 @@
+---
+import Hr from "./Hr.astro";
+
+export interface Props {
+  activeNav?: "projects" | "blog" | "about";
+}
+
+const paths = {
+  Projects: "/projects",
+  Blog: "/blog",
+  About: "/about",
+};
+
+const { activeNav } = Astro.props;
+---
+
+<a id="skip-to-content" href="#main-content">Skip to content</a>
+<header class="mb-12">
+  <div
+    class="py-6 sm:py-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-between"
+  >
+    <h1 class="text-2xl font-bold">
+      <a href="/">ErikGXDev</a>
+    </h1>
+
+    <nav class="flex gap-6">
+      {
+        Object.entries(paths).map((entry) => {
+          const [key, value] = entry;
+          const isActive = value.slice(1) == activeNav;
+          return (
+            <a href={value} class={isActive ? "active" : ""}>
+              {key}
+            </a>
+          );
+        })
+      }
+    </nav>
+  </div>
+  <Hr />
+</header>
+
+<style>
+  #skip-to-content {
+    @apply absolute -top-full left-16 z-50 bg-brand-white/10 px-3 py-2 text-brand-white transition-all focus:top-4;
+  }
+
+  nav a:nth-child(1) {
+    @apply hover:text-brand-orange;
+  }
+  nav a:nth-child(2) {
+    @apply hover:text-brand-red;
+  }
+  nav a:nth-child(3) {
+    @apply hover:text-brand-magenta;
+  }
+
+  .active {
+    @apply decoration-wavy;
+  }
+</style>
